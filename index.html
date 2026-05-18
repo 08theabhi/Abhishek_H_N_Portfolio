@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Abhishek H N — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-logo">AHN</div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#home" class="mobile-link">Home</a></li>
+      <li><a href="#about" class="mobile-link">About</a></li>
+      <li><a href="#skills" class="mobile-link">Skills</a></li>
+      <li><a href="#projects" class="mobile-link">Projects</a></li>
+      <li><a href="#contact" class="mobile-link">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- HOME -->
+  <section id="home">
+    <div class="home-inner">
+      <div class="home-photo-wrap">
+        <div class="home-photo-placeholder">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="38" r="20" fill="#c9b99a" opacity="0.5"/>
+            <ellipse cx="50" cy="85" rx="32" ry="22" fill="#c9b99a" opacity="0.4"/>
+          </svg>
+          <span class="photo-label">Your Photo</span>
+        </div>
+      </div>
+      <div class="home-text">
+        <p class="home-greeting">Hello, I'm</p>
+        <h1 class="home-name">Abhishek<br><em>H N</em></h1>
+        <p class="home-title">Master of Computer Applications &nbsp;·&nbsp; Developer &nbsp;·&nbsp; Problem Solver</p>
+        <div class="home-cta">
+          <a href="#projects" class="btn-primary">View My Work</a>
+          <a href="#contact" class="btn-ghost">Get In Touch</a>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="section-label">01 &mdash; About</div>
+      <div class="about-grid">
+        <div class="about-heading">
+          <h2>A little<br><em>about me</em></h2>
+        </div>
+        <div class="about-content">
+          <p class="about-para">
+            I'm <strong>Abhishek H N</strong>, a postgraduate student pursuing a <strong>Master of Computer Applications (MCA)</strong>. 
+            I'm passionate about building elegant, efficient software and exploring the intersection of technology and real-world problem solving.
+          </p>
+          <p class="about-para">
+            My academic journey has equipped me with a strong foundation in software development, algorithms, and system design. 
+            I enjoy writing clean code, learning new frameworks, and turning complex problems into simple, beautiful solutions.
+          </p>
+          <div class="about-tags">
+            <span>MCA Student</span>
+            <span>Full Stack Enthusiast</span>
+            <span>Open to Opportunities</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-inner">
+      <div class="section-label">02 &mdash; Skills</div>
+      <h2 class="section-title">Technical<br><em>Expertise</em></h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-icon">&#60;/&#62;</div>
+          <h3>Frontend</h3>
+          <ul>
+            <li>HTML5</li>
+            <li>CSS3</li>
+            <li>JavaScript</li>
+            <li>Responsive Design</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">⚙</div>
+          <h3>Backend</h3>
+          <ul>
+            <li>Python</li>
+            <li>Java</li>
+            <li>Node.js</li>
+            <li>REST APIs</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">🗄</div>
+          <h3>Database</h3>
+          <ul>
+            <li>MySQL</li>
+            <li>MongoDB</li>
+            <li>SQL Queries</li>
+            <li>Data Modelling</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">🛠</div>
+          <h3>Tools</h3>
+          <ul>
+            <li>Git &amp; GitHub</li>
+            <li>VS Code</li>
+            <li>Linux</li>
+            <li>Figma</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-inner">
+      <div class="section-label">03 &mdash; Projects</div>
+      <h2 class="section-title">Selected<br><em>Work</em></h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-number">01</div>
+          <div class="project-body">
+            <h3>Project Title One</h3>
+            <p>A brief description of what this project does, the problem it solves, and what technologies were used to build it.</p>
+            <div class="project-tags">
+              <span>HTML</span><span>CSS</span><span>JavaScript</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="link-arrow">GitHub ↗</a>
+              <a href="#" class="link-arrow">Live Demo ↗</a>
+            </div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-number">02</div>
+          <div class="project-body">
+            <h3>Project Title Two</h3>
+            <p>A brief description of what this project does, the problem it solves, and what technologies were used to build it.</p>
+            <div class="project-tags">
+              <span>Python</span><span>MySQL</span><span>Flask</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="link-arrow">GitHub ↗</a>
+              <a href="#" class="link-arrow">Live Demo ↗</a>
+            </div>
+          </div>
+        </div>
+        <div class="project-card project-card--wide">
+          <div class="project-number">03</div>
+          <div class="project-body">
+            <h3>Project Title Three <span class="badge">Coming Soon</span></h3>
+            <p>This is a placeholder for an upcoming project. Update this with your project details, description, and relevant links once it's ready.</p>
+            <div class="project-tags">
+              <span>React</span><span>Node.js</span><span>MongoDB</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="link-arrow">GitHub ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="section-label">04 &mdash; Contact</div>
+      <div class="contact-grid">
+        <div class="contact-left">
+          <h2>Let's<br><em>Connect</em></h2>
+          <p>I'm always open to discussing new opportunities, collaborations, or just a friendly chat about tech.</p>
+          <div class="contact-links">
+            <a href="mailto:abhishek@email.com" class="contact-item">
+              <span class="contact-icon">✉</span>
+              <span>abhishek@email.com</span>
+            </a>
+            <a href="https://github.com/" target="_blank" class="contact-item">
+              <span class="contact-icon">&#9670;</span>
+              <span>github.com/abhishekhn</span>
+            </a>
+            <a href="https://linkedin.com/" target="_blank" class="contact-item">
+              <span class="contact-icon">in</span>
+              <span>linkedin.com/in/abhishekhn</span>
+            </a>
+          </div>
+        </div>
+        <div class="contact-right">
+          <form class="contact-form" id="contactForm">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="your@email.com" required />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="4" placeholder="What would you like to say?" required></textarea>
+            </div>
+            <button type="submit" class="btn-primary btn-full">Send Message</button>
+            <p class="form-note" id="formNote"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-logo">AHN</span>
+      <p>© 2025 Abhishek H N. Designed &amp; Built with care.</p>
+      <a href="#home" class="back-top">↑ Top</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
