@@ -138,18 +138,11 @@ const contactForm = document.getElementById('contactForm');
 const cFeedback = document.getElementById('cFeedback');
 
 if (contactForm) {
-  contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const message = document.getElementById('message').value.trim();
-
-    if (!name || !email || !message) {
-      cFeedback.textContent = 'Please fill in all fields.';
-      cFeedback.style.color = '#c0392b';
-      return;
-    }
-
+  contactForm.addEventListener('submit', () => {
+    const btn = contactForm.querySelector('.btn-send span');
+    btn.textContent = 'Sending…';
+  });
+}
     const btn = contactForm.querySelector('.btn-send span');
     btn.textContent = 'Sending…';
 
