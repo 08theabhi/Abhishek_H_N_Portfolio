@@ -138,21 +138,49 @@ const contactForm = document.getElementById('contactForm');
 const cFeedback = document.getElementById('cFeedback');
 
 if (contactForm) {
-  contactForm.addEventListener('submit', () => {
-    const btn = contactForm.querySelector('.btn-send span');
-    btn.textContent = 'Sending…';
-  });
-}
-    const btn = contactForm.querySelector('.btn-send span');
-    btn.textContent = 'Sending…';
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-    setTimeout(() => {
-      cFeedback.textContent = '✓ Message received! I\'ll get back to you soon.';
-      cFeedback.style.color = 'var(--accent)';
-      contactForm.reset();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    if (!name || !email || !message) {
+      cFeedback.textContent = 'Please fill in all fields.';
+      cFeedback.style.color = '#c0392b';
+      return;
+    }
+
+    const btn = contactForm.querySelector('.btn-send span');
+    btn.textContent = 'Sending…';
+    cFeedback.textContent = '';
+
+    try {
+      const response = await fetch('https://formspree.io/f/xdajkwdo', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(contactForm)
+      });
+
+      if (response.ok) {
+        cFeedback.textContent = '✓ Message sent! I\'ll get back to you soon.';
+        cFeedback.style.color = 'var(--accent)';
+        contactForm.reset();
+        btn.textContent = 'Send Message';
+        setTimeout(() => { cFeedback.textContent = ''; }, 6000);
+      } else {
+        const data = await response.json();
+        cFeedback.textContent = data.errors
+          ? data.errors.map(err => err.message).join(', ')
+          : 'Something went wrong. Please try again.';
+        cFeedback.style.color = '#c0392b';
+        btn.textContent = 'Send Message';
+      }
+    } catch (err) {
+      cFeedback.textContent = 'Network error. Please check your connection.';
+      cFeedback.style.color = '#c0392b';
       btn.textContent = 'Send Message';
-      setTimeout(() => { cFeedback.textContent = ''; }, 6000);
-    }, 1000);
+    }
   });
 }
 
