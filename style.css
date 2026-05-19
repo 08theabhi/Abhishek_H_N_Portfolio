@@ -492,6 +492,7 @@ section { padding: 7rem clamp(1.5rem, 5vw, 4rem); }
   justify-content: center;
   opacity: 0;
   animation: fadeSlideUp 0.9s var(--ease-out) 1.5s forwards;
+  padding-bottom: 2.5rem;
 }
 
 .photo-box {
@@ -558,8 +559,8 @@ section { padding: 7rem clamp(1.5rem, 5vw, 4rem); }
 .float-chip small { display: block; font-size: 0.68rem; color: var(--ink3); }
 .float-chip span { font-size: 1.1rem; }
 
-.chip-1 { bottom: 20%; right: -12%; animation-delay: 0s; }
-.chip-2 { top: 16%; left: -14%; animation-delay: 1.5s; }
+.chip-1 { bottom: -18px; right: -10px; animation-delay: 0s; }
+.chip-2 { bottom: -18px; left: -10px; animation-delay: 1.5s; }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
