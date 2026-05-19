@@ -1,138 +1,190 @@
-// ==============================
-// NAVBAR SCROLL EFFECT
-// ==============================
+// ============================================================
+// PRELOADER
+// ============================================================
+const preloader = document.getElementById('preloader');
+const preloaderBar = document.getElementById('preloaderBar');
+let progress = 0;
+
+const fillBar = setInterval(() => {
+  progress += Math.random() * 18;
+  if (progress >= 100) {
+    progress = 100;
+    clearInterval(fillBar);
+    setTimeout(() => {
+      preloader.classList.add('done');
+    }, 300);
+  }
+  preloaderBar.style.width = progress + '%';
+}, 80);
+
+// ============================================================
+// CUSTOM CURSOR
+// ============================================================
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursorRing');
+
+if (cursor && cursorRing) {
+  let mouseX = 0, mouseY = 0;
+  let ringX = 0, ringY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top = mouseY + 'px';
+  });
+
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    cursorRing.style.left = ringX + 'px';
+    cursorRing.style.top = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  // Scale ring on interactive elements
+  document.querySelectorAll('a, button, input, textarea').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursorRing.style.width = '56px';
+      cursorRing.style.height = '56px';
+      cursorRing.style.opacity = '0.35';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursorRing.style.width = '36px';
+      cursorRing.style.height = '36px';
+      cursorRing.style.opacity = '0.6';
+    });
+  });
+}
+
+// ============================================================
+// NAVBAR SCROLL
+// ============================================================
 const navbar = document.getElementById('navbar');
 
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 30) {
-    navbar.classList.add('scrolled');
-  } else {
-    navbar.classList.remove('scrolled');
-  }
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+  updateActiveNav();
 });
 
-// ==============================
-// MOBILE MENU TOGGLE
-// ==============================
-const menuToggle = document.getElementById('menuToggle');
-const mobileMenu = document.getElementById('mobileMenu');
-const mobileLinks = document.querySelectorAll('.mobile-link');
-
-menuToggle.addEventListener('click', () => {
-  mobileMenu.classList.toggle('open');
-});
-
-mobileLinks.forEach(link => {
-  link.addEventListener('click', () => {
-    mobileMenu.classList.remove('open');
-  });
-});
-
-// Close menu on outside click
-document.addEventListener('click', (e) => {
-  if (!navbar.contains(e.target) && !mobileMenu.contains(e.target)) {
-    mobileMenu.classList.remove('open');
-  }
-});
-
-// ==============================
-// ACTIVE NAV LINK ON SCROLL
-// ==============================
-const sections = document.querySelectorAll('section[id]');
+// ============================================================
+// ACTIVE NAV ON SCROLL
+// ============================================================
 const navLinks = document.querySelectorAll('.nav-links a');
+const sections = document.querySelectorAll('section[id]');
 
-function updateActiveLink() {
+function updateActiveNav() {
   const scrollY = window.pageYOffset;
-
   sections.forEach(section => {
-    const sectionTop = section.offsetTop - 100;
-    const sectionHeight = section.offsetHeight;
-    const sectionId = section.getAttribute('id');
-
-    if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-      navLinks.forEach(link => {
-        link.style.color = '';
-        link.style.fontWeight = '';
-      });
-      const activeLink = document.querySelector(`.nav-links a[href="#${sectionId}"]`);
-      if (activeLink) {
-        activeLink.style.color = 'var(--accent)';
-      }
+    const top = section.offsetTop - 120;
+    const bottom = top + section.offsetHeight;
+    const id = section.getAttribute('id');
+    const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+    if (link) {
+      link.classList.toggle('active', scrollY >= top && scrollY < bottom);
     }
   });
 }
 
-window.addEventListener('scroll', updateActiveLink);
+// ============================================================
+// HAMBURGER / MOBILE MENU
+// ============================================================
+const hamburger = document.getElementById('hamburger');
+const mobileOverlay = document.getElementById('mobileOverlay');
+const mobLinks = document.querySelectorAll('.mob-link');
 
-// ==============================
-// FADE-IN ON SCROLL
-// ==============================
-const fadeElements = document.querySelectorAll(
-  '#about .about-grid, #skills .skill-card, #projects .project-card, #contact .contact-grid, .home-text, .home-photo-wrap'
-);
-
-fadeElements.forEach(el => el.classList.add('fade-in'));
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry, index) => {
-    if (entry.isIntersecting) {
-      setTimeout(() => {
-        entry.target.classList.add('visible');
-      }, index * 80);
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
-
-fadeElements.forEach(el => observer.observe(el));
-
-// ==============================
-// CONTACT FORM
-// ==============================
-const contactForm = document.getElementById('contactForm');
-const formNote = document.getElementById('formNote');
-
-contactForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const message = document.getElementById('message').value.trim();
-
-  if (!name || !email || !message) {
-    formNote.textContent = 'Please fill in all fields.';
-    formNote.style.color = '#c0392b';
-    return;
-  }
-
-  // Simulate form submission
-  formNote.textContent = 'Thank you! Your message has been received.';
-  formNote.style.color = 'var(--accent)';
-  contactForm.reset();
-
-  setTimeout(() => { formNote.textContent = ''; }, 5000);
+hamburger.addEventListener('click', () => {
+  const open = mobileOverlay.classList.toggle('open');
+  hamburger.classList.toggle('open', open);
 });
 
-// ==============================
-// SMOOTH SCROLL FOR ALL NAV ANCHORS
-// ==============================
+mobLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    mobileOverlay.classList.remove('open');
+    hamburger.classList.remove('open');
+  });
+});
+
+// ============================================================
+// SCROLL REVEAL
+// ============================================================
+const revealEls = document.querySelectorAll('.sr-reveal');
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+// Stagger children within the same parent
+revealEls.forEach((el, i) => {
+  // If no explicit --d is set via inline style, auto-stagger siblings
+  if (!el.style.getPropertyValue('--d')) {
+    const siblings = [...el.parentElement.querySelectorAll('.sr-reveal')];
+    const idx = siblings.indexOf(el);
+    el.style.setProperty('--d', (idx * 100) + 'ms');
+  }
+  revealObserver.observe(el);
+});
+
+// ============================================================
+// CONTACT FORM
+// ============================================================
+const contactForm = document.getElementById('contactForm');
+const cFeedback = document.getElementById('cFeedback');
+
+if (contactForm) {
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    if (!name || !email || !message) {
+      cFeedback.textContent = 'Please fill in all fields.';
+      cFeedback.style.color = '#c0392b';
+      return;
+    }
+
+    const btn = contactForm.querySelector('.btn-send span');
+    btn.textContent = 'Sending…';
+
+    setTimeout(() => {
+      cFeedback.textContent = '✓ Message received! I\'ll get back to you soon.';
+      cFeedback.style.color = 'var(--accent)';
+      contactForm.reset();
+      btn.textContent = 'Send Message';
+      setTimeout(() => { cFeedback.textContent = ''; }, 6000);
+    }, 1000);
+  });
+}
+
+// ============================================================
+// SMOOTH SCROLL
+// ============================================================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    const target = document.querySelector(this.getAttribute('href'));
+  anchor.addEventListener('click', (e) => {
+    const target = document.querySelector(anchor.getAttribute('href'));
     if (target) {
       e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const offset = target.getBoundingClientRect().top + window.pageYOffset - 72;
+      window.scrollTo({ top: offset, behavior: 'smooth' });
     }
   });
 });
 
-// ==============================
-// HOME TEXT ENTRANCE ANIMATION
-// ==============================
-window.addEventListener('load', () => {
-  const homeEl = document.querySelector('.home-text');
-  const homePhoto = document.querySelector('.home-photo-wrap');
-  if (homeEl) {
-    setTimeout(() => homePhoto && homePhoto.classList.add('visible'), 100);
-    setTimeout(() => homeEl.classList.add('visible'), 250);
-  }
-});
+// ============================================================
+// PARALLAX — BIG BG TEXT
+// ============================================================
+const bgText = document.querySelector('.big-bg-text');
+
+if (bgText) {
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    bgText.style.transform = `translateY(calc(-50% + ${scrolled * 0.12}px))`;
+  });
+}
