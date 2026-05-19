@@ -502,6 +502,7 @@ section { padding: 7rem clamp(1.5rem, 5vw, 4rem); }
   background: linear-gradient(160deg, #ede5d8, #f7f0e7);
   border: 1px solid var(--border);
   overflow: hidden;
+  border-radius: 12px 60px 12px 60px;
 }
 
 .photo-placeholder {
