@@ -389,12 +389,14 @@ section { padding: 7rem clamp(1.5rem, 5vw, 4rem); }
   line-height: 1.0;
   color: var(--ink);
   margin-bottom: 1.3rem;
-  overflow: hidden;
+  overflow: visible;
+  padding-left: 4px;
 }
 
 .reveal-line {
   display: block;
-  overflow: hidden;
+  overflow: visible;
+  padding-left: 2px;
 }
 
 .reveal-line span,
